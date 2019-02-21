@@ -265,9 +265,33 @@ class BasicAgentAA(BustersAgent):
         self.printInfo(gameState)
         move = Directions.STOP
         legal = gameState.getLegalActions(0) ##Legal position from the pacman
-        move_random = random.randint(0, 3)
+		#move_random = random.randint(0, 3)
         if   ( move_random == 0 ) and Directions.WEST in legal:  move = Directions.WEST
         if   ( move_random == 1 ) and Directions.EAST in legal: move = Directions.EAST
         if   ( move_random == 2 ) and Directions.NORTH in legal:   move = Directions.NORTH
         if   ( move_random == 3 ) and Directions.SOUTH in legal: move = Directions.SOUTH
         return move
+
+		minimo = vector[0].manhattanDistance()
+		numero = 0;
+		vector = gameState.getGhostPositions()
+		for(0 : gameState.getNumAgents-2; n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!):
+			if(vector[n].manhattanDistance() < minimo):
+				minimo = vector[n].manhattanDistance()
+				numero = n
+			
+		posicion = vector[num] 
+		
+		#getx y gety Obtener cada coordenada por separado
+		
+		if xf > x and yf > y and xf < yf: move = Directions.NORTH
+		if xf > x and yf >= y and xf > yf: move = Directions.EAST
+		if xf > x and yf < y and xf < yf: move = Directions.EAST
+		if xf > x and yf <= y and xf > yf: move = Directions.SOUTH
+		if xf < x and yf < y and xf < yf: move = Directions.SOUTH
+		if xf < x and yf <= y and xf > yf: move = Directions.WEST
+		if xf < x and yf > y and xf < yf: move = Directions.WEST
+		if xf < x and yf >= y and xf > yf: move = Directions.NORTH
+		if xf == yf and xf > x: move = Directions.EAST
+		if xf == yf and xf < x: move = Directions.WEST
+		
