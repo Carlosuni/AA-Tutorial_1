@@ -1,0 +1,33 @@
+    def chooseAction(self, gameState):
+        self.countActions = self.countActions + 1
+        self.printInfo(gameState)
+        move = Directions.STOP
+        legal = gameState.getLegalActions(0) ##Legal position from the pacman
+		#move_random = random.randint(0, 3)
+		
+		vector = gameState.getGhostPositions()	#vector posiciones fantasmas
+		minimo = vector[0].manhattanDistance()	#almacena el tipo de dato
+		numero = 0;
+		for n in range (0,gameState.getNumAgents-2):
+			if(vector[n].manhattanDistance() < minimo):		#si el valor de la pos actual es menor que el del minimo almacenado
+				minimo = vector[n].manhattanDistance()		#actualiza el minimo
+				numero = n									#pos en el vector del minimo nuevo
+			
+		posicion = vector[numero] 
+		
+		#Obtener cada coordenada por separado!!!!!!!!!!
+		self[x][y]			#pacman
+		posicion[xf][xy]	#fantasma
+		
+		if xf > x and yf > y and xf < yf: move = Directions.NORTH
+		if xf > x and yf >= y and xf > yf: move = Directions.EAST
+		if xf > x and yf < y and xf < yf: move = Directions.EAST
+		if xf > x and yf <= y and xf > yf: move = Directions.SOUTH
+		if xf < x and yf < y and xf < yf: move = Directions.SOUTH
+		if xf < x and yf <= y and xf > yf: move = Directions.WEST
+		if xf < x and yf > y and xf < yf: move = Directions.WEST
+		if xf < x and yf >= y and xf > yf: move = Directions.NORTH
+		if xf == yf and xf > x: move = Directions.EAST
+		if xf == yf and xf < x: move = Directions.WEST
+
+        return move
