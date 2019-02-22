@@ -270,13 +270,22 @@ class BasicAgentAA(BustersAgent):
         if   ( move_random == 1 ) and Directions.EAST in legal: move = Directions.EAST
         if   ( move_random == 2 ) and Directions.NORTH in legal:   move = Directions.NORTH
         if   ( move_random == 3 ) and Directions.SOUTH in legal: move = Directions.SOUTH
+
+        pacmanPosition = gameState.getPacmanPosition()
+        legal = [a for a in gameState.getLegalPacmanActions()]
+        livingGhosts = gameState.getLivingGhosts()
+        livingGhostPositionDistributions = \
+            [beliefs for i, beliefs in enumerate(self.ghostBeliefs)
+             if livingGhosts[i+1]]
+        # return Directions.EAST
+
         return move
 
-    # Guardado de la información del estado de la partida en un archivo .csv
+    # Guardado de info de la partida en csv
     def printLineData(self, gameState, f):
         print "--------------------- Guardando en .csv el estado de la partida ---------------------"
 
-        lineData = str(gameState.data.layout.width) + "," + "," + str(gameState.data.layout.height) + "," +\
+        lineData = str(gameState.data.layout.width) + "," + str(gameState.data.layout.height) + "," +\
                    str(gameState.getPacmanPosition()) + "," + str(gameState.getLegalPacmanActions()) + "," +\
                    str(gameState.data.agentStates[0].getDirection()) + "," + str(gameState.getNumAgents() - 1) + "," +\
                    str(gameState.getLivingGhosts()) + "," + str(gameState.getGhostPositions()) + "," + \

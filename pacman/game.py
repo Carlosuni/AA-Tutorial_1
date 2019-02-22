@@ -613,7 +613,7 @@ class Game:
 
         # Apertura inicial del archivo para ir guardando los estados
         f = open("pac-man_gameState.csv", "a+")
-        f.write("map_width,map_height,pman_pos,legal_actions,pman_dir,n_ghosts,living_ghosts,ghostos_pos,ghost_dirs,ghost_dists,pac_dots,dist_near_dot,score\n")
+        # f.write("map_width,map_height,pman_pos,legal_actions,pman_dir,n_ghosts,living_ghosts,ghostos_pos,ghost_dirs,ghost_dists,pac_dots,dist_near_dot,score\n")
 
 
         while not self.gameOver:
