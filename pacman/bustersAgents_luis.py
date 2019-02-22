@@ -1,4 +1,4 @@
-# bustersAgents.py
+# bustersAgents_luis.py
 # ----------------
 # Licensing Information:  You are free to use or extend these projects for
 # educational purposes provided that (1) you do not distribute or publish
@@ -265,23 +265,33 @@ class BasicAgentAA(BustersAgent):
         self.printInfo(gameState)
         move = Directions.STOP
         legal = gameState.getLegalActions(0) ##Legal position from the pacman
-        move_random = random.randint(0, 3)
+		#move_random = random.randint(0, 3)
         if   ( move_random == 0 ) and Directions.WEST in legal:  move = Directions.WEST
         if   ( move_random == 1 ) and Directions.EAST in legal: move = Directions.EAST
         if   ( move_random == 2 ) and Directions.NORTH in legal:   move = Directions.NORTH
         if   ( move_random == 3 ) and Directions.SOUTH in legal: move = Directions.SOUTH
         return move
 
-    # Guardado de la información del estado de la partida en un archivo .csv
-    def printLineData(self, gameState, f):
-        print "--------------------- Guardando en .csv el estado de la partida ---------------------"
-
-        lineData = str(gameState.data.layout.width) + "," + "," + str(gameState.data.layout.height) + "," +\
-                   str(gameState.getPacmanPosition()) + "," + str(gameState.getLegalPacmanActions()) + "," +\
-                   str(gameState.data.agentStates[0].getDirection()) + "," + str(gameState.getNumAgents() - 1) + "," +\
-                   str(gameState.getLivingGhosts()) + "," + str(gameState.getGhostPositions()) + "," + \
-                   str([gameState.getGhostDirections().get(i) for i in range(0, gameState.getNumAgents() - 1)]) + "," +\
-                   str(gameState.data.ghostDistances) + "," + str(gameState.getNumFood()) + "," +\
-                   str(gameState.getDistanceNearestFood()) + "," + str(gameState.getScore()) + "\n"
-
-        f.write(lineData)
+		minimo = vector[0].manhattanDistance()
+		numero = 0;
+		vector = gameState.getGhostPositions()
+		for(0 : gameState.getNumAgents-2; n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!):
+			if(vector[n].manhattanDistance() < minimo):
+				minimo = vector[n].manhattanDistance()
+				numero = n
+			
+		posicion = vector[num] 
+		
+		#getx y gety Obtener cada coordenada por separado
+		
+		if xf > x and yf > y and xf < yf: move = Directions.NORTH
+		if xf > x and yf >= y and xf > yf: move = Directions.EAST
+		if xf > x and yf < y and xf < yf: move = Directions.EAST
+		if xf > x and yf <= y and xf > yf: move = Directions.SOUTH
+		if xf < x and yf < y and xf < yf: move = Directions.SOUTH
+		if xf < x and yf <= y and xf > yf: move = Directions.WEST
+		if xf < x and yf > y and xf < yf: move = Directions.WEST
+		if xf < x and yf >= y and xf > yf: move = Directions.NORTH
+		if xf == yf and xf > x: move = Directions.EAST
+		if xf == yf and xf < x: move = Directions.WEST
+		

@@ -610,12 +610,19 @@ class Game:
         agentIndex = self.startingIndex
         numAgents = len( self.agents )
         step = 0
+
+        # Apertura inicial del archivo para ir guardando los estados
+        f = open("pac-man_gameState.csv", "a+")
+        f.write("map_width,map_height,pman_pos,legal_actions,pman_dir,n_ghosts,living_ghosts,ghostos_pos,ghost_dirs,ghost_dists,pac_dots,dist_near_dot,score\n")
+
+
         while not self.gameOver:
             # Fetch the next agent
             agent = self.agents[agentIndex]
             move_time = 0
             skip_action = False
-                
+
+
             # Generate an observation of the state
             if 'observationFunction' in dir( agent ):
                 self.mute(agentIndex)
@@ -638,6 +645,8 @@ class Game:
                 self.unmute()
             else:
                 observation = self.state.deepCopy()
+
+
             # Solicit an action
             action = None
             step += 1
@@ -699,6 +708,17 @@ class Game:
             else:
                 self.state = self.state.generateSuccessor( agentIndex, action )
 
+            # if agent == self.agents[0]:
+            #     if "printLineData" in dir(self.agents[0]):
+            #         info = self.agents[0].printLineData(observation)
+            #         f.write(str(info))
+            #         f.write("\n")
+
+            # ------------------
+            # PrintLineData del la info que almacenamos del estado de la partida
+            if agent == self.agents[0]:
+                self.agents[0].printLineData(self.state.deepCopy(), f)
+
             # Change the display
             self.display.update( self.state.data )
             ###idx = agentIndex - agentIndex % 2 + 1
@@ -713,6 +733,9 @@ class Game:
 
             if _BOINC_ENABLED:
                 boinc.set_fraction_done(self.getProgress())
+
+        f.close()
+
 
         # inform a learning agent of the game result
         for agentIndex, agent in enumerate(self.agents):
